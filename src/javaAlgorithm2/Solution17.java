@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public class Solution17 {
 	public static void main(String[] args) {
-		String number = "1924";
-		int k = 2;
-		solution(number , k);
+		String number = "1277322314";
+		int k = 5;
+		System.out.println(solution(number , k));
 		
 	}
 	 public static String solution(String number, int k) {

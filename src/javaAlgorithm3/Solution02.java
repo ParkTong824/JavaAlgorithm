@@ -13,7 +13,7 @@ public class Solution02 {
 
         while (true){
             int countA = 0;
-            int countB = 0;,
+            int countB = 0;
             for (int i =0 ; i<3 ; i++){
                 for (int j = 0 ; j<2 ; j++){
                     if(numA==i && numB==j){

@@ -2,7 +2,7 @@ package programmersLevel1;
 
 public class Solution01 {
     public static void main(String[] args) {
-        System.out.println(solution("   ABCvnernalf     asudjvojs sdn cvkap "));
+        System.out.println(solution("   ABCvnernalf     asudjvojs sdn cvkap      "));
     }
 
     public static String solution(String s) {

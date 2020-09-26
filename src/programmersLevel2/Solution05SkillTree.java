@@ -14,32 +14,20 @@ public class Solution05SkillTree {
         int answer = 0;
         Queue<String> skillQue = new LinkedList<>();
         String[] skillArr = skill.split("");
-        for (int i = 0 ; i < skillArr.length ; i++){
-            skillQue.add(skillArr[i]);
-        }
-        for (int i = 0 ; i <skill_trees.length ; i++){
-            Boolean isPossible = true;
+
+        for (int i = 0 ; i < skill_trees.length ; i++){
+            for (String skillString : skillArr){
+                skillQue.add(skillString);
+            }
             String[] skillTreeArr = skill_trees[i].split("");
-            Queue<String> que = new LinkedList<>(skillQue);
-            int skillIndex = 0;
-            while (que.size()!=0){
-                String skillName = que.poll();
-                for (int j = 0 ; j < skillTreeArr.length ; j++){
-                    if (!isPossible){
-                        break;
-                    }
-                    if (skillName.equals(skillTreeArr[j])){
-                        if (j>=skillIndex){
-                            skillIndex = j;
-                            isPossible = true;
-                            break;
-                        }else {
-                            isPossible = false;
-                            break;
-                        }
-                    }
+            for (int j=0 ; j < skillTreeArr.length ; j++){
+                if (skillQue.peek().equals(skillTreeArr[j])){
+                    skillQue.poll();
+                }else if (!skillQue.peek().equals(skillTreeArr[j])&&skillQue.contains(skillTreeArr[j])){
+                    break;
                 }
-                if (que.size()==0&&isPossible==true){
+
+                if (j==skillTreeArr.length-1||skillQue.size()==0){
                     answer++;
                 }
             }

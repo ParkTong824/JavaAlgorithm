@@ -1,31 +1,42 @@
 package leetcode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Solution02AddTwoNum {
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode answer ;
         ListNode answerNode = new ListNode();
-        int count = 0;
-        while (true) {
-            if (answerNode.val==0){
-                answerNode.val = l1.val+l2.val;
+        List<Integer> answerList = new ArrayList<>();
+        boolean isMoreTen = false;
+        int l1Num = l1.val;
+        int l2Num = l2.val;
+        int sumNum = l1Num+l2Num;
+        answerList.add(sumNum);
+        while (l1.next!=null||l2.next!=null){
+            l1 = l1.next;
+            l2 = l2.next;
+            l1Num = l1.val;
+            l2Num = l2.val;
+            if (isMoreTen){
+                sumNum = l1Num+l2Num+1;
             }else {
-                answerNode.val = l1.val+l2.val+1;
+                sumNum = l1Num+l2Num;
             }
 
-            if (answerNode.val>=10){
-                answerNode.val=answerNode.val%10;
-                answerNode.next=new ListNode(1);;
+            if (sumNum>=10){
+                answerList.add(sumNum%10);
+                isMoreTen=true;
             }else {
-                answerNode.next=new ListNode(0);
+                answerList.add(sumNum);
+                isMoreTen=false;
             }
-            if (l1.next!=null||l2.next!=null){
-                answerNode = answerNode.next;
-                l1 = l1.next;
-                l2 = l2.next;
-            }else {
-                break;
-            }
+
+        }
+        answerNode.val = answerList.get(0);
+        for (int i = 1 ; i < answerList.size() ; i++){
+            answerNode.next = new ListNode(answerList.get(i));
+            answerNode = answerNode.next;
         }
 
         return answerNode;
@@ -51,6 +62,8 @@ public class Solution02AddTwoNum {
 
         ListNode answer = addTwoNumbers(l1,l2);
         System.out.println(answer.val);
+        System.out.println(answer.next.val);
+        System.out.println(answer.next.next.next==null);
     }
 
   /*

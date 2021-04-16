@@ -4,66 +4,73 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Solution02AddTwoNum {
-
-    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode answerNode = new ListNode();
-        List<Integer> answerList = new ArrayList<>();
-        boolean isMoreTen = false;
-        int l1Num = l1.val;
-        int l2Num = l2.val;
-        int sumNum = l1Num+l2Num;
-        answerList.add(sumNum);
-        while (l1.next!=null||l2.next!=null){
-            l1 = l1.next;
-            l2 = l2.next;
-            l1Num = l1.val;
-            l2Num = l2.val;
-            if (isMoreTen){
-                sumNum = l1Num+l2Num+1;
-            }else {
-                sumNum = l1Num+l2Num;
-            }
-
-            if (sumNum>=10){
-                answerList.add(sumNum%10);
-                isMoreTen=true;
-            }else {
-                answerList.add(sumNum);
-                isMoreTen=false;
-            }
-
+    public static void main(String[] args) {
+        ListNode exam1 = new ListNode(2, new ListNode(4, new ListNode(3)));
+        ListNode exam2 = new ListNode(5, new ListNode(6, new ListNode(4)));
+        ListNode result = new Solution02AddTwoNum().addTwoNumbers( exam1, exam2);
+        while(true){
+            System.out.print(result.val + " ");
+            result = result.next;
+            if(result == null)
+                break;
         }
-        answerNode.val = answerList.get(0);
-        for (int i = 1 ; i < answerList.size() ; i++){
-            answerNode.next = new ListNode(answerList.get(i));
-            answerNode = answerNode.next;
+        ListNode exam3 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9)))))));
+        ListNode exam4 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))));
+        ListNode result2 = new Solution02AddTwoNum().addTwoNumbers( exam3, exam4);
+        System.out.println();
+        while(true){
+            System.out.print(result2.val + " ");
+            result2 = result2.next;
+            if(result2 == null)
+                break;
         }
-
-        return answerNode;
     }
 
-    public static class ListNode {
-      int val;
-      ListNode next;
-      ListNode() {}
-      ListNode(int val) { this.val = val; }
-      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-  }
+    private ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode resultNode = new ListNode(0);
+        boolean l1IsNUll = false, l2IsNull = false;
 
-    public static void main(String[] args) {
-        ListNode l1 = new ListNode();
-        l1.val=2;
-        l1.next = new ListNode(4);
-        l1.next.next = new ListNode(3);
-        ListNode l2 = new ListNode();
-        l2.val=5;
-        l2.next = new ListNode(6);
-        l2.next.next = new ListNode(4);
+        ListNode tempNode = resultNode;
+        while(true){
+            if(tempNode.next != null){
+                tempNode = tempNode.next;
+            }
+            int sum = l1.val + l2.val + tempNode.val;
+            int plusNum = sum >= 10 ? 1 : 0;
+            sum = sum >= 10 ? sum % 10 : sum;
+            tempNode.val = sum;
+            tempNode.next = new ListNode(plusNum);
 
-        ListNode answer = addTwoNumbers(l1,l2);
-        System.out.println(answer.val);
-        System.out.println(answer.next.val);
-        System.out.println(answer.next.next.next==null);
+            l1IsNUll = checkNodeIsNull(l1);
+            l2IsNull = checkNodeIsNull(l2);
+            if(l1IsNUll && l2IsNull){
+                if(tempNode.next.val == 0)
+                    tempNode.next = null;
+                break;
+            }
+        }
+
+        return resultNode;
+    }
+
+    private boolean checkNodeIsNull(ListNode listNode){
+        if(listNode.next == null){
+            listNode.val = 0;
+            return true;
+        }else{
+            listNode.val = listNode.next.val;
+            listNode.next = listNode.next.next;
+        }
+        return false;
+    }
+
+    // Example Class
+    private static class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
 
   /*

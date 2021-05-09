@@ -26,9 +26,13 @@ function solution(leave,day,holidays) {
     for (var i = 1 ; i <= 30 ; i++){
         var remain = leave;
 
-        while (remain>0){
-            
-            if (i == holidays[holidayIndex]){
+        while (holidays[holidayIndex]<i){
+            holidayIndex++;
+        }
+        j=i;
+        while (remain>=0){
+
+            if (j == holidays[holidayIndex]){
                 maxDay++;
                 if (holidays[holidayIndex]==holidays[holidayIndex+1]){
                     holidayIndex++;
@@ -38,6 +42,7 @@ function solution(leave,day,holidays) {
                 remain--;
                 maxDay++;
             }
+            j++;
         }
         if (answer<maxDay){
             answer=maxDay;

@@ -43,8 +43,9 @@ public class S54_SpiralMatrix {
     }
 
     public static void main(String[] args) {
-        int[][] matrix = {{1,2,3,4},{5,6,7,8},{9,10,11,12}};
-
+//        int[][] matrix = {{1,2,3,4},{5,6,7,8},{9,10,11,12}};
+        int[][] matrix = {{7,9,6}};
+//        int[][] matrix = {{1, 2, 3}, { 4, 5, 6 },{ 7, 8, 9 }};
         System.out.println(spiralOrder(matrix).toString());
     }
 }

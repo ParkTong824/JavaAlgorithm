@@ -8,6 +8,13 @@ public class S56_MergeInterval {
     public static int[][] merge(int[][] intervals) {
         int[] result = new int[2];
         List<int[]> resultList = new ArrayList<>();
+        Arrays.sort(intervals, ((o1, o2) -> {
+            if (o1[0]==o2[0]){
+                return Integer.compare(o1[1],o2[1]);
+            } else {
+                return Integer.compare(o1[0],o2[0]);
+            }
+        }));
         result[0] = intervals[0][0];
         result[1] = intervals[0][1];
         for (int i = 1; i < intervals.length; i++) {
@@ -35,7 +42,7 @@ public class S56_MergeInterval {
     }
 
     public static void main(String[] args) {
-        int[][] interval = {{1, 4}, {0, 4}};
+        int[][] interval = {{1, 4}, {0, 0}};
         System.out.println(Arrays.toString(merge(interval)[0]));
         System.out.println(Arrays.toString(merge(interval)[1]));
         System.out.println(Arrays.toString(merge(interval)[2]));

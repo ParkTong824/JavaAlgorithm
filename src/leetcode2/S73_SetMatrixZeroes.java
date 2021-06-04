@@ -2,7 +2,12 @@ package leetcode2;
 
 public class S73_SetMatrixZeroes {
     public void setZeroes(int[][] matrix) {
+        int[][] answer =new int[matrix.length][matrix[0].length];
+        for (int i = 0 ; i < matrix.length ; i++){
+            for (int j = 0 ; j < matrix[0].length; j++){
 
+            }
+        }
     }
 }
 /*

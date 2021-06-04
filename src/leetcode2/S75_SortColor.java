@@ -6,6 +6,6 @@ public class S75_SortColor {
     }
 
     public static void main(String[] args) {
-        
+
     }
 }

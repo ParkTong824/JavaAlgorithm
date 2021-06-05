@@ -9,7 +9,7 @@ public class S73_SetMatrixZeroes {
         int[][] matrix = {{1, 1, 1}, {1, 0, 1},{1,1,1}};
         setZeroes(matrix);
     }
-    public static int[][] setZeroes(int[][] matrix) {
+    public static void setZeroes(int[][] matrix) {
         int[][] answer =new int[matrix.length][matrix[0].length];
         Set<Integer> horSet = new HashSet<>();
         Set<Integer> verSet = new HashSet<>();
@@ -34,7 +34,9 @@ public class S73_SetMatrixZeroes {
                 answer[i][j]=matrix[i][j];
             }
         }
-        return answer;
+        for(int i=0; i<matrix.length; i++){
+            System.arraycopy(answer[i], 0, matrix[i], 0, answer[0].length);
+        }
     }
 }
 /*

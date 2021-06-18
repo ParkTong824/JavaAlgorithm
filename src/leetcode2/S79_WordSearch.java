@@ -15,9 +15,12 @@ public class S79_WordSearch {
                     int iIndex = i;
                     int jIndex = j;
                     boolean isFinish = false;
-                    for (int k = 0 ; k < wordArr.length ; k++){
-                        if (isExist(board,wordArr,iIndex,jIndex,k)){
-                            if (k==wordArr.length-1){
+                    for (int k = 0 ; k < wordArr.length-1 ; k++){
+                        int[] nextIndex = isExist(board,wordArr,iIndex,jIndex,k+1);
+                        if (nextIndex[0]!=-1){
+                            iIndex=nextIndex[0];
+                            jIndex=nextIndex[1];
+                            if (k==wordArr.length-2){
                                 isFinish=true;
                             }
                             continue;
@@ -34,36 +37,36 @@ public class S79_WordSearch {
 
         return false;
     }
-    public static boolean isExist(char[][] board,char[] wordArr, int iIndex, int jIndex, int k){
+    public static int[] isExist(char[][] board,char[] wordArr, int iIndex, int jIndex, int k){
         if (iIndex-1>=0){
             if (board[iIndex-1][jIndex]==wordArr[k]){
                 iIndex--;
-                board[iIndex-1][jIndex]=0;
-                return true;
+                board[iIndex][jIndex]=0;
+                return new int[]{iIndex,jIndex};
             }
         }
         if (iIndex+1!=board.length){
             if (board[iIndex+1][jIndex]==wordArr[k]){
-                iIndex--;
-                board[iIndex+1][jIndex]=0;
-                return true;
+                iIndex++;
+                board[iIndex][jIndex]=0;
+                return new int[]{iIndex,jIndex};
             }
         }
         if (jIndex-1>=0){
             if (board[iIndex][jIndex-1]==wordArr[k]){
                 jIndex--;
-                board[iIndex][jIndex-1]=0;
-                return true;
+                board[iIndex][jIndex]=0;
+                return new int[]{iIndex,jIndex};
             }
         }
         if (jIndex+1!=board.length){
             if (board[iIndex][jIndex+1]==wordArr[k]){
                 jIndex++;
-                board[iIndex][jIndex+1]=0;
-                return true;
+                board[iIndex][jIndex]=0;
+                return new int[]{iIndex,jIndex};
             }
         }
-        return false;
+        return new int[]{-1,-1};
     }
 
 }

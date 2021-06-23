@@ -1,43 +1,36 @@
 package leetcode;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class S21_MergeTwoList {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode resultList = new ListNode();
-        boolean isFinish = false;
-        while (!isFinish) {
-            isFinish = mergeTwoList(l1, l2, resultList);
-        }
-        return resultList;
-    }
-
-    public boolean mergeTwoList(ListNode firstNode, ListNode secondNode, ListNode mergeNode) {
-        if (firstNode.next != null && secondNode.next != null) {
-            if (firstNode.val == secondNode.val) {
-                mergeNode.val = firstNode.val;
-                mergeNode.val = secondNode.val;
-                firstNode.val = firstNode.next.val;
-                firstNode.next = firstNode.next.next;
-                secondNode.val = secondNode.next.val;
-                secondNode.next = secondNode.next.next;
-            } else if (firstNode.val > secondNode.val) {
-                mergeNode.val = secondNode.val;
-                mergeNode.next = new ListNode();
-                mergeNode.val = mergeNode.next.val;
-                secondNode.val = secondNode.next.val;
-                secondNode.next = secondNode.next.next;
-            } else {
-                mergeNode.val = secondNode.val;
-                mergeNode.next = new ListNode();
-                mergeNode.val = mergeNode.next.val;
-                secondNode.val = secondNode.next.val;
-                secondNode.next = secondNode.next.next;
+        List<Integer> ll = new LinkedList<Integer>();
+        ListNode sol = new ListNode(0);
+        ListNode head = sol;
+        while(l1 != null && l2!=null){
+            if (l1.val < l2.val){
+                sol.next = new ListNode(l1.val);
+                sol = sol.next;
+                l1 = l1.next;
+            }else{
+                sol.next = new ListNode(l2.val);
+                sol = sol.next;
+                l2 = l2.next;
             }
-        } else if (firstNode.next != null) {
-
-        } else if (secondNode.next != null) {
-
         }
-        return false;
+        while(l1!=null){
+            sol.next = new ListNode(l1.val);
+            sol = sol.next;
+            l1 = l1.next;
+        }
+        while(l2!=null){
+            sol.next = new ListNode(l2.val);
+            sol = sol.next;
+            l2 = l2.next;
+        }
+        return head.next;
+
     }
 
     public static class ListNode {

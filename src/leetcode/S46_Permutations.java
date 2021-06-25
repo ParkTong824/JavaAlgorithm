@@ -1,40 +1,34 @@
 package leetcode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class S46_Permutations {
-    public List<List> permute(int[] nums) {
-
-        List<List> answer = new ArrayList<>();
-        List<Integer> compareList = new ArrayList<>();
-        for (int i = 0; i < nums.length; i++) {
-            compareList.add(nums[i]);
+    public static List<List> permute(int[] nums) {
+        return addArray(nums);
+    }
+    public static List<List> addArray(int[] nums){
+        List<List> returnArr = new ArrayList<>();
+        if (nums.length==1){
+            returnArr.add(Arrays.asList(nums[0]));
+            return returnArr;
         }
-        fillList(answer, new ArrayList<Integer>(), compareList);
-        return answer;
-
+        int[] beforeNums = Arrays.copyOf(nums,nums.length-1);
+        List<List> beforeArr = addArray(beforeNums);
+        for (int i = nums.length-1 ; i>=0; i--){
+            for (int j = 0 ; j < beforeArr.size() ; j++){
+                List<Integer> addArr = new ArrayList<>(beforeArr.get(j));
+                addArr.add(i,nums[nums.length-1]);
+                returnArr.add(addArr);
+            }
+        }
+        return returnArr;
     }
 
-    public void fillList(List<List> answer, List<Integer> list, List<Integer> compareList) {
-        if (compareList.size() == 0) {
-            answer.add(new ArrayList<>(list));
-            return;
-        }
-
-        for (int i = 0; i < compareList.size(); i++) {
-            list.add(compareList.get(i));
-            List<Integer> curr = new ArrayList<>();
-            for (int j = 0; j < i; j++) {
-                curr.add(compareList.get(j));
-            }
-            for (int k = i + 1; k < compareList.size(); k++) {
-                curr.add(compareList.get(k));
-            }
-            fillList(answer, list, curr);
-            list.remove(list.size() - 1);
-        }
-
+    public static void main(String[] args) {
+        int[] nums = {1,2,3,4,5};
+        System.out.println(permute(nums).toString());
 
     }
 }

@@ -66,7 +66,7 @@ public class Solution02 {
                 }
 
             }
-            if (!isRetain){
+            if (isFinish){
                 break;
             }
         }

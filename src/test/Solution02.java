@@ -4,16 +4,6 @@ import java.util.*;
 
 public class Solution02 {
     public static void main(String[] args) {
-//        int n = 10;
-//        int[] v1 = {1,10,6,5,6,9};
-//        int[] v2 = {3,7,2,8,7,3};
-//        int[] num = {3,4,5,1,8,7,9,2};
-//        int[] amount = {10,5,6,-6,-8,2,-2,5};
-//        int n = 10;
-//        int[] v1 = {8,4,4,1};
-//        int[] v2 = {1,10,9,4};
-//        int[] num = {2,5,8,6,4,1,3,10,7,4};
-//        int[] amount = {3,-1,3,3,1,-2,-4,1,2,-5};
         int n = 4;
         int[] v1 = {1,3};
         int[] v2 = {2,4};

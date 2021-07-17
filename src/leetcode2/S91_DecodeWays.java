@@ -2,13 +2,32 @@ package leetcode2;
 
 public class S91_DecodeWays {
     public static void main(String[] args) {
-
+        String s = "0";
+        System.out.println(numDecodings(s));
     }
-    public int numDecodings(String s) {
+    public static int numDecodings(String s) {
         if (s.charAt(0)=='0'){
             return 0;
         }
-        return 0;
+        int result = decodeReculsive(s);
+
+        return result;
+    }
+    public static int decodeReculsive(String s){
+        int result = 0;
+        if (s.length()<=1){
+            return 1;
+        }
+        if (s.charAt(0)=='1'||s.charAt(0)=='2'){
+            result+=decodeReculsive(s.substring(1));
+            if (s.charAt(1)<'7'){
+                result+=decodeReculsive(s.substring(2));
+            }
+        } else {
+            result+=decodeReculsive(s.substring(1));
+        }
+
+        return result;
     }
 }
 /*

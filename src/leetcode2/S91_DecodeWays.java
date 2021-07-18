@@ -2,7 +2,7 @@ package leetcode2;
 
 public class S91_DecodeWays {
     public static void main(String[] args) {
-        String s = "0";
+        String s = "12";
         System.out.println(numDecodings(s));
     }
     public static int numDecodings(String s) {
@@ -15,14 +15,26 @@ public class S91_DecodeWays {
     }
     public static int decodeReculsive(String s){
         int result = 0;
+        if (s.length()>0&&s.charAt(0)=='0'){
+            return 0;
+        }
         if (s.length()<=1){
             return 1;
         }
         if (s.charAt(0)=='1'||s.charAt(0)=='2'){
-            result+=decodeReculsive(s.substring(1));
-            if (s.charAt(1)<'7'){
+            if(s.charAt(1)=='0'){
                 result+=decodeReculsive(s.substring(2));
+            } else {
+                result+=decodeReculsive(s.substring(1));
+                if (s.length()>2&&(s.charAt(1)=='1'||s.charAt(1)=='2')&&s.charAt(2)=='0'){
+
+                } else {
+                    if (!(s.charAt(0)=='2'&&s.charAt(1)>'6')){
+                        result+=decodeReculsive(s.substring(2));
+                    }
+                }
             }
+
         } else {
             result+=decodeReculsive(s.substring(1));
         }

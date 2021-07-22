@@ -3,7 +3,7 @@ SELECT
 FROM
     Weather AS id1,
     Weather AS id2
-WHERE  
+WHERE
     id1.Temperature>id2.Temperature
         AND
     DATEDIFF(id1.recordDate , id2.recordDate )=1 ;

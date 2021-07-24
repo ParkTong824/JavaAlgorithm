@@ -6,7 +6,7 @@ public class S168_ExcelSheetColumn {
         StringBuilder stringBuilder = new StringBuilder();
         while (true){
             int lengthCheck = 0;
-            for (int i = 0 ; i <= resultLength; i++){
+            for (int i = 1 ; i <= resultLength; i++){
                 lengthCheck+=Math.pow(26,i);
             }
             if (lengthCheck>=columnNumber){
@@ -16,20 +16,20 @@ public class S168_ExcelSheetColumn {
         }
         for (int i = resultLength ; i>=1 ; i--){
             int tempNum = 0;
-            for (int j = 1 ; j <= i ; j++){
+            for (int j = 1 ; j < i ; j++){
                 tempNum+=Math.pow(26,j);
             }
-            int headNum = columnNumber/tempNum;
+            int headNum = columnNumber/(tempNum==0?1:tempNum);
             char headChar = (char) ('A'+headNum-1);
             stringBuilder.append(headChar);
-            columnNumber=columnNumber%tempNum;
+            columnNumber=columnNumber%(tempNum==0?1:tempNum);
         }
 
         return stringBuilder.toString();
     }
 
     public static void main(String[] args) {
-        int columnNumber = 28;
+        int columnNumber = 2147483647;
         System.out.println(convertToTitle(columnNumber));
     }
 }

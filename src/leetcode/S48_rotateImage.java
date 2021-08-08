@@ -1,14 +1,28 @@
 package leetcode;
 
+import java.util.Arrays;
+
 public class S48_rotateImage {
-    public void rotate(int[][] matrix) {
-        int[][] changeMatrix = matrix.clone();
+    public static void rotate(int[][] matrix) {
+        int[][] changeMatrix = new int[matrix.length][matrix.length];
+        for (int i = 0 ; i<matrix.length ; i++){
+            System.arraycopy(matrix[i], 0, changeMatrix[i], 0, matrix[0].length);
+        }
         for (int i = 0 ; i < matrix.length ; i++){
             for (int j = 0 ; j < matrix[0].length ; j++){
                 int changeInt = changeMatrix[j][i];
                 matrix[i][matrix.length-1-j] = changeInt;
             }
         }
+    }
+
+    public static void main(String[] args) {
+        int[][] matrix = {{1,2,3},{4,5,6},{7,8,9}};
+        rotate(matrix);
+
+        System.out.println(Arrays.toString(matrix[0]));
+        System.out.println(Arrays.toString(matrix[1]));
+        System.out.println(Arrays.toString(matrix[2]));
     }
 }
 

@@ -8,13 +8,6 @@ public class S118_PascalTriangle {
     public static List<List<Integer>> generate(int numRows) {
         List<List<Integer>> answer = new ArrayList<>();
         for (int i = 0 ; i < numRows ; i++) {
-            if (i == 0){
-                answer.add(new ArrayList<>(Arrays.asList(1)));
-                continue;
-            } else if (i ==1){
-                answer.add(new ArrayList<>(Arrays.asList(1,1)));
-                continue;
-            }
             List<Integer> result = new ArrayList<>();
             for (int j = 0 ; j <i+1 ; j++){
                 if (j==0 || j==i){

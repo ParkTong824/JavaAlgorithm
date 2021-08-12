@@ -8,25 +8,17 @@ public class S119_PascalTriangle2 {
     public static List<Integer> getRow(int rowIndex) {
         List<Integer> answer = new ArrayList<>();
         List<Integer> temp = new ArrayList<>();
-        for (int i = 0 ; i < rowIndex ; i++) {
-            if (i == 0){
-                temp = new ArrayList<>(Arrays.asList(1));
-                answer= new ArrayList<>(temp);
-                continue;
-            } else if (i ==1){
-                temp = new ArrayList<>(Arrays.asList(1));
-                answer= new ArrayList<>(temp);
-            } else {
-                answer = new ArrayList<>();
-                for (int j = 0 ; j <i+1 ; j++){
-                    if (j==0 || j==i){
-                        answer.add(1);
-                    } else {
-                        answer.add(temp.get(j-1)+temp.get(j));
-                    }
+        for (int i = 0 ; i < rowIndex+1 ; i++) {
+            answer = new ArrayList<>();
+            for (int j = 0 ; j <i+1 ; j++){
+                if (j==0 || j==i){
+                    answer.add(1);
+                } else {
+                    answer.add(temp.get(j-1)+temp.get(j));
                 }
-                temp = new ArrayList<>(answer);
             }
+            temp = new ArrayList<>(answer);
+
         }
         return answer;
     }

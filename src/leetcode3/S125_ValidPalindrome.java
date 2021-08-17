@@ -7,11 +7,11 @@ public class S125_ValidPalindrome {
         s = s.toLowerCase();
         while (front<tail){
             boolean isAlpha = false;
-            if (s.charAt(front)<'a' || s.charAt(front)>'z'){
+            if (isChar(s,front)){
                 front++;
                 isAlpha=true;
             }
-            if (s.charAt(tail)<'a' || s.charAt(tail)>'z'){
+            if (isChar(s,tail)){
                 tail--;
                 isAlpha=true;
             }
@@ -26,6 +26,27 @@ public class S125_ValidPalindrome {
             }
         }
         return true;
+    }
+
+    public static boolean isChar(String s , int index){
+        boolean isNotChar = false;
+        if(!(s.charAt(index)>='a' && s.charAt(index)<='z')){
+            isNotChar = true;
+        }else {
+            return false;
+        }
+        if (!(s.charAt(index)>='A' && s.charAt(index)<='Z')){
+            isNotChar = true;
+        }else {
+            return false;
+        }
+        if (!(s.charAt(index)>='0' && s.charAt(index)<='9')){
+            isNotChar = true;
+        }else {
+            return false;
+        }
+
+        return isNotChar;
     }
 
     public static void main(String[] args) {

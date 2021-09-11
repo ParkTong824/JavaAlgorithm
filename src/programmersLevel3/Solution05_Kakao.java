@@ -7,7 +7,7 @@ public class Solution05_Kakao {
         int lastNum = 0;
         int nowNum = 0;
         for (int i = 0 ; i < dartArr.length ; i++) {
-            if (dartArr[i]>='0' && dartArr[i]=<'9'){
+            if (dartArr[i]>='0' && dartArr[i]<='9'){
                 if(dartArr[i]=='0' && nowNum==1){
                     nowNum= 10;
                 } else {

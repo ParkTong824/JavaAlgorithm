@@ -10,5 +10,6 @@ public class S401_BinaryWatch {
         }
         int hourMax = 3;
         int minMax = 5;
+        return null;
     }
 }

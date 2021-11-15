@@ -1,33 +1,27 @@
 package leetcode5;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 public class S414_ThirdMaximumNum {
     public static int thirdMax(int[] nums) {
-        int[] checkArr = new int[]{nums[0],nums[0],nums[0]};
-        for (int i = 1 ; i < nums.length ; i++) {
-            for (int j = 0 ; j < checkArr.length ; j++) {
-                if (checkArr[j]<nums[i]) {
-                    int tempNum = checkArr[j];
-                    int changeNum = nums[i];
-                    checkArr[j] = changeNum;
-                    for (int k = j+1 ; k < checkArr.length ; k++) {
-                        changeNum = checkArr[k];
-                        checkArr[k] = tempNum;
-                        tempNum = changeNum;
-                    }
-                }
-            }
+        Set<Integer> sortSet = new TreeSet<>();
+        for (int i = 0 ; i < nums.length ; i++) {
+            sortSet.add(nums[i]);
         }
-        if (checkArr[0]==checkArr[1]){
-            return checkArr[0];
-        } else if (checkArr[1]==checkArr[2]) {
-            return checkArr[0];
+        Object[] resultArr = sortSet.toArray();
+        if (resultArr.length<3) {
+            return (int) resultArr[resultArr.length-1];
         } else {
-            return checkArr[2];
+            return (int) resultArr[resultArr.length-3];
         }
     }
 
     public static void main(String[] args) {
-        int[] nums = {3,2,1};
+        int[] nums = new int[]{1,2};
+
         System.out.println(thirdMax(nums));
     }
 }

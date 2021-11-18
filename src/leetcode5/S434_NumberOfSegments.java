@@ -5,25 +5,14 @@ public class S434_NumberOfSegments {
         if (s.equals("")){
             return 0;
         }
-        String[] answerArr = s.split("");
-        boolean isChar = false;
+        String[] answerArr = s.split(" ");
         int answer = 0;
         for (int i = 0 ; i < answerArr.length ; i++) {
-            if (answerArr[i].matches("[\"!@#$%^&*()_+-=',.:]")) {
+            if (answerArr[i].equals("")) {
                 continue;
-            } else if (answerArr[i].equals(" ")){
-                if (isChar){
-                    answer++;
-                    isChar = false;
-                } else {
-                    continue;
-                }
             } else {
-                isChar = true;
+                answer++;
             }
-        }
-        if (isChar) {
-            answer++;
         }
         return answer;
     }

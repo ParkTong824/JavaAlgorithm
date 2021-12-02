@@ -18,7 +18,7 @@ public class S476_NumberComplement {
                 index--;
             }
         }
-        for (int i = resultArr.length-1 ; i >= index ; i--){
+        for (int i = resultArr.length-1-index ; i < resultArr.length ; i++){
             resultArr[i]=1;
         }
         int answer = 0;

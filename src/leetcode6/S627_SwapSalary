@@ -1,3 +1,11 @@
+SELECT
+      id, name,
+      CASE
+          WHEN sex = 'm' THEN 'f'
+          WHEN sex = 'f' THEN 'm'
+      END as sex
+  FROM
+      Salary
 
 /*
 Salary table:

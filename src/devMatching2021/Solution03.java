@@ -55,9 +55,6 @@ public class Solution03 {
         }
        return (int) (answer%(Math.pow(10,9)+7));
     }
-    public static int checkCacheMap() {
-
-    }
 
     public static void main(String[] args) {
         String s = "abcc";

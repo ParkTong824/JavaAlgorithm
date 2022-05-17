@@ -18,14 +18,14 @@ public class S500_keyboardRow {
             String[] tempArr = words[i].split("");
             int lineNum = 0;
             for (int j = 0 ; j < 3 ; j++) {
-                if (checkMap.get(j).contains(tempArr[0])) {
+                if (checkMap.get(j).contains(tempArr[0].toLowerCase())) {
                     lineNum = j;
                     break;
                 }
             }
             boolean isContain = true;
             for (int j = 1 ; j < tempArr.length ; j++) {
-                if (!checkMap.get(lineNum).contains(tempArr[j])){
+                if (!checkMap.get(lineNum).contains(tempArr[j].toLowerCase())){
                     isContain = false;
                     break;
                 }

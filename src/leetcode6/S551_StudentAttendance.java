@@ -1,11 +1,13 @@
 package leetcode6;
 
 public class S551_StudentAttendance {
+//    502458
+//    1406917
     public static void main(String[] args) {
-        long checkStart = System.currentTimeMillis();
+        long checkStart = System.nanoTime();
         String test = "PPALLL";
         System.out.println(checkRecord(test));
-        long finishTime = System.currentTimeMillis();
+        long finishTime = System.nanoTime();
         System.out.println((finishTime-checkStart));
     }
     public static boolean checkRecord(String s) {
@@ -31,6 +33,26 @@ public class S551_StudentAttendance {
 
         return true;
     }
+//    public static boolean checkRecord(String s) {
+//        String[] splitArr = s.split("");
+//        int absentCount = 0;
+//        int lateCount = 0;
+//        for (int i = 0 ; i < splitArr.length ; i++) {
+//            if (splitArr[i].equals("A")) {
+//                absentCount++;
+//            } else if (splitArr[i].equals("L")) {
+//                lateCount++;
+//            }
+//            if (lateCount == 3) {
+//                absentCount++;
+//            }
+//            if (absentCount >= 2) {
+//                return false;
+//            }
+//        }
+//
+//        return true;
+//    }
 }
 /*
 Input: s = "PPALLP"

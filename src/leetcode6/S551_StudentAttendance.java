@@ -5,7 +5,7 @@ public class S551_StudentAttendance {
 //    1406917
     public static void main(String[] args) {
         long checkStart = System.nanoTime();
-        String test = "PPALLL";
+        String test = "LLLLL";
         System.out.println(checkRecord(test));
         long finishTime = System.nanoTime();
         System.out.println((finishTime-checkStart));
@@ -18,13 +18,16 @@ public class S551_StudentAttendance {
             switch (splitArr[i]) {
                 case 'A':
                     absentCount++;
+                    lateCount = 0;
                     break;
                 case 'L':
                     lateCount++;
                     break;
+                default:
+                    lateCount = 0;
             }
             if (lateCount == 3) {
-                absentCount++;
+                return false;
             }
             if (absentCount >= 2) {
                 return false;

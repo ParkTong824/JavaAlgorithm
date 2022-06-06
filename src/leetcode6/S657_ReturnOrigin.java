@@ -2,10 +2,33 @@ package leetcode6;
 
 public class S657_ReturnOrigin {
     public static void main(String[] args) {
-
+        System.out.println(judgeCircle("LL"));
     }
-    public boolean judgeCircle(String moves) {
-
+    public static boolean judgeCircle(String moves) {
+        int horIndex = 0;
+        int verIndex = 0;
+        char[] moveArr = moves.toCharArray();
+        for (int i = 0 ; i < moveArr.length ; i++) {
+            switch (moveArr[i]){
+                case 'U':
+                    verIndex++;
+                    break;
+                case 'D':
+                    verIndex--;
+                    break;
+                case 'L':
+                    horIndex--;
+                    break;
+                case 'R':
+                    horIndex++;
+                    break;
+            }
+        }
+        if (horIndex==0 && verIndex==0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 /*

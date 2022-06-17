@@ -1,0 +1,80 @@
+SELECT * FROM PLACES;
+
+
+-- 코드를 입력하세요
+SELECT
+    MID(gr.lef,6,2) as MONTH, PLACES.NAME, gr.cnt as COUNT
+FROM (
+    SELECT
+        PLACE_ID, LEFT(CREATED_AT, 7) as lef, count(*) as cnt
+    FROM
+        (SELECT
+            PLACE_ID, CREATED_AT
+        FROM
+            PLACE_REVIEWS
+        WHERE
+            CREATED_AT
+                BETWEEN '2018-01-01' and '2018-12-31') as dt
+    GROUP BY
+        PLACE_ID, lef
+    ORDER BY
+        cnt DESC) as gr
+LEFT JOIN
+    PLACES
+        ON gr.PLACE_ID = PLACES.ID
+GROUP BY gr.lef
+ORDER BY gr.lef, PLACES.NAME;
+
+
+SELECT
+    gr.MONTH, gr.NAME, gr.cnt as COUNT
+FROM (
+    SELECT
+        NAME, MID(CREATED_AT, 6,2) as MONTH, count(*) as cnt
+    FROM
+        (SELECT
+            PLACES.NAME as NAME, CREATED_AT
+        FROM
+            PLACE_REVIEWS
+        LEFT JOIN
+                    PLACES
+                        ON PLACE_REVIEWS.PLACE_ID = PLACES.ID
+        WHERE
+            CREATED_AT
+                BETWEEN '2018-01-01' and '2018-12-31'
+                ) as dt
+    GROUP BY
+        NAME, MONTH
+    ORDER BY
+        cnt DESC, NAME*1) as gr
+GROUP BY gr.MONTH
+ORDER BY gr.MONTH;
+
+-- 코드를 입력하세요
+SELECT
+    PLACE_ID, MID(CREATED_AT, 6,2) as MONTH, COUNT(*)
+FROM
+    (SELECT
+        *
+    FROM
+        PLACE_REVIEWS
+    WHERE
+        CREATED_AT BETWEEN '2018-01-01' and '2018-12-31') as bet
+GROUP BY
+    PLACE_ID, MONTH
+ORDER BY COUNT(*)
+
+
+
+01	6	11 - 4608SB · 11*2Bd2Bth Lv46*skyline view*door step to Crown
+02	8	11 - 4608SB · 11*2Bd2Bth Lv46*skyline view*door step to Crown
+03	10	Junction of CBD,Casino&Yarra River* FREE PARKING
+04	9	Junction of CBD,Casino&Yarra River* FREE PARKING
+05	9	Sunny, Modern Apartment with Cityscape Views
+06	8	Sunny, Modern Apartment with Cityscape Views
+07	9	11 - 4608SB · 11*2Bd2Bth Lv46*skyline view*door step to Crown
+08	6	11 - 4608SB · 11*2Bd2Bth Lv46*skyline view*door step to Crown
+09	7	11 - 4608SB · 11*2Bd2Bth Lv46*skyline view*door step to Crown
+10	11	FREE PARKING - The Velvet Lux in Melbourne CBD
+11	6	FREE PARKING - The Velvet Lux in Melbourne CBD
+12	1	★ Fresh Fitzroy Pad with City Views! ★

@@ -1,8 +1,20 @@
 package programmersLevel0;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Solution14 {
     public int[] solution(int n, int[] numlist) {
-        int[] answer = {};
+        List<Integer> checkArr = new ArrayList<>();
+        for (int i : numlist) {
+            if (i % n == 0) {
+                checkArr.add(i);
+            }
+        }
+        int[] answer = new int[checkArr.size()];
+        for (int i = 0 ; i < checkArr.size() ; i++) {
+            answer[i] = checkArr.get(i);
+        }
         return answer;
     }
 }

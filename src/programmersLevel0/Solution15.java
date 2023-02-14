@@ -1,9 +1,29 @@
 package programmersLevel0;
 
 public class Solution15 {
-    public int solution(int num, int k) {
-        int answer = 0;
-        return answer;
+    public static int solution(int num, int k) {
+        int answer = 1;
+        int checkIndex = 1;
+        boolean isContain = false;
+        while (num > 0) {
+            if (num % 10 == k) {
+                answer = checkIndex;
+                isContain = true;
+            }
+            checkIndex++;
+            num /= 10;
+        }
+        if (isContain) {
+            return checkIndex - answer;
+        } else {
+            return -1;
+        }
+    }
+
+    public static void main(String[] args) {
+        int num = 29183;
+        int k = 1;
+        solution(num,k);
     }
 }
 /*

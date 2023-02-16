@@ -1,9 +1,15 @@
 package programmersLevel0;
 
+import java.util.Arrays;
+
 public class Solution16 {
     public int solution(String[] s1, String[] s2) {
-        int answer = 0;
-        return answer;
+        int firstLength = s1.length;
+        for (int i = 0 ; i < s2.length ; i++) {
+            int index = i;
+            s1 = Arrays.stream(s1).filter(item -> !item.equals(s2[index])).toArray(String[]::new);
+        }
+        return firstLength-s1.length;
     }
 }
 /*

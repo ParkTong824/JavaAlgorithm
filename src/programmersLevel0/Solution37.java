@@ -1,42 +1,34 @@
 package programmersLevel0;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class Solution37 {
     public static int[] solution(int[] numlist, int n) {
         int[] answer = new int[numlist.length];
-        Arrays.sort(numlist);
-        int firstPivot = 0;
-        int secondPivot = numlist.length-1;
-
+        Map<Integer,String> checkMap = new HashMap<>();
         for (int i = 0 ; i < numlist.length ; i++) {
-            if (n <= numlist[i]) {
-                secondPivot = i;
-                firstPivot = i-1;
-                break;
-            }
-        }
-        int answerIndex = 0;
-        while (firstPivot >=0 || secondPivot <numlist.length) {
-            if (firstPivot >= 0 && secondPivot <numlist.length) {
-                if (n - numlist[firstPivot] >= numlist[secondPivot] - n) {
-                    answer[answerIndex] = numlist[secondPivot];
-                    secondPivot++;
-                } else {
-                    answer[answerIndex] = numlist[firstPivot];
-                    firstPivot--;
-                }
+            int tempIndex = numlist[i]-n < 0 ? -i : i;
+            numlist[i]= Math.abs(numlist[i]-n);
+            if (checkMap.containsKey(numlist[i])) {
+                checkMap.put(numlist[i], checkMap.get(numlist[i])+","+tempIndex);
             } else {
-                if (firstPivot < 0) {
-                    answer[answerIndex] = numlist[secondPivot];
-                    secondPivot++;
-                } else {
-                    answer[answerIndex] = numlist[firstPivot];
-                    firstPivot--;
+                checkMap.put(numlist[i], String.valueOf(tempIndex));
+            }
+        }
+        Arrays.sort(numlist);
+        for (int i = 0 ; i < numlist.length ; i++) {
+            int checkNum = numlist[i];
+            String checkString = checkMap.get(checkNum);
+            String[] checkArr = checkString.split(",");
+            if (checkArr.length>1) {
+                String remainString = Integer.parseInt(checkArr[0]) > Integer.parseInt(checkArr[1])? checkArr[0] : checkArr[1];
+                answer[i] = Integer.parseInt(checkArr[0]) > Integer.parseInt(checkArr[1])? Integer.parseInt(checkArr[0])+n : Integer.parseInt(checkArr[1])+n;
+
+
                 }
             }
-            answerIndex++;
         }
+
         return answer;
     }
 

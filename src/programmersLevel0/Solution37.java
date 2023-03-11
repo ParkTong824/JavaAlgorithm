@@ -5,30 +5,31 @@ import java.util.*;
 public class Solution37 {
     public static int[] solution(int[] numlist, int n) {
         int[] answer = new int[numlist.length];
+        int[] checkNumList = numlist.clone();
         Map<Integer,String> checkMap = new HashMap<>();
         for (int i = 0 ; i < numlist.length ; i++) {
-            int tempIndex = numlist[i]-n < 0 ? -i : i;
-            numlist[i]= Math.abs(numlist[i]-n);
-            if (checkMap.containsKey(numlist[i])) {
-                checkMap.put(numlist[i], checkMap.get(numlist[i])+","+tempIndex);
+            String tempIndex = checkNumList[i]-n < 0 ? "-"+i : String.valueOf(i);
+            checkNumList[i]= Math.abs(numlist[i]-n);
+            if (checkMap.containsKey(checkNumList[i])) {
+                checkMap.put(checkNumList[i], checkMap.get(checkNumList[i])+","+tempIndex);
             } else {
-                checkMap.put(numlist[i], String.valueOf(tempIndex));
+                checkMap.put(checkNumList[i], String.valueOf(tempIndex));
             }
         }
-        Arrays.sort(numlist);
-        for (int i = 0 ; i < numlist.length ; i++) {
-            int checkNum = numlist[i];
+        Arrays.sort(checkNumList);
+        for (int i = 0 ; i < checkNumList.length ; i++) {
+            int checkNum = checkNumList[i];
             String checkString = checkMap.get(checkNum);
             String[] checkArr = checkString.split(",");
             if (checkArr.length>1) {
-                String remainString = Integer.parseInt(checkArr[0]) > Integer.parseInt(checkArr[1])? checkArr[0] : checkArr[1];
-                answer[i] = Integer.parseInt(checkArr[0]) > Integer.parseInt(checkArr[1])? Integer.parseInt(checkArr[0])+n : Integer.parseInt(checkArr[1])+n;
+                String remainString = Integer.parseInt(checkArr[0]) > 0? checkArr[1] : checkArr[0];
+                answer[i] = checkArr[0].startsWith("-") ? numlist[Math.abs(Integer.parseInt(checkArr[1]))] : numlist[Math.abs(Integer.parseInt(checkArr[0]))];
 
-
-                }
+                checkMap.put(checkNum, remainString);
+            } else {
+                answer[i] = numlist[Math.abs(Integer.parseInt(checkArr[0]))];
             }
         }
-
         return answer;
     }
 

@@ -1,8 +1,12 @@
 package programmersLevel0;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Solution39 {
     public static int solution(int[][] lines) {
         int answer = 0;
+        Set<Integer> checkSet = new HashSet<>();
         for (int i = 0 ; i < 3 ; i++) {
             int checkLength = lines[i][1] - lines[i][0];
             for (int j = lines[i][0] ; j < lines[i][1] ; j++) {
@@ -10,8 +14,11 @@ public class Solution39 {
                 if (checkLine == 3) {
                     checkLine = 0;
                 }
-                if (lines[checkLine][0] < j && lines[checkLine][1] > j+1) {
-                    answer++;
+                if (lines[checkLine][0] <= j && lines[checkLine][1] >= j+1) {
+                    if (checkSet.add(j+j-1)) {
+                        answer++;
+                    }
+
                 }
             }
         }
@@ -19,7 +26,7 @@ public class Solution39 {
     }
 
     public static void main(String[] args) {
-        int[][] lines = {{0, 5}, {3, 9}, {1, 10}};
+        int[][] lines = {{0, 1}, {2, 5}, {3, 9}};
         solution(lines);
     }
 }

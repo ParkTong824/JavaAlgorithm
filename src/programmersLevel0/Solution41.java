@@ -5,7 +5,7 @@ public class Solution41 {
         int answer = 0;
         for (int i = 0 ; i < n ; i++) {
             answer++;
-            while (answer % 3 == 0 || (answer>10 && (answer/10)%3 == 0) || (answer>10 &&(answer % 10) == 3)) {
+            while (answer % 3 == 0 || (answer>10 && (answer/10) == 3) || (answer>10 &&(answer % 10) == 3) || (answer>100 && (answer % 100 / 10 == 3))) {
                 answer++;
             }
         }
@@ -13,7 +13,7 @@ public class Solution41 {
     }
 
     public static void main(String[] args) {
-        int n = 15;
-        solution(n);
+        int n = 40;
+        System.out.println(solution(n));
     }
 }

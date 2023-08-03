@@ -1,12 +1,26 @@
 package programmersLevel0;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Solution90 {
     public int solution(int[] array) {
         Arrays.sort(array);
 
         return array[array.length/2];
+    }
+
+    public int solution2(int num1, int num2) {
+        return num1%num2;
+    }
+
+    public int[] solution3(int[] numbers) {
+        int[] answer = new int[numbers.length];
+        for (int i = 0 ; i < numbers.length ; i++) {
+            answer[i] = numbers[i] * 2;
+        }
+        return answer;
     }
 }
 /*

@@ -22,6 +22,34 @@ public class Solution90 {
         }
         return answer;
     }
+
+    public int[] solution4(int numer1, int denom1, int numer2, int denom2) {
+        int sumNumer = numer1 * denom2 + denom1 * numer2;
+        int denom = denom1 * denom2;
+
+        int compareNum = 2;
+
+        while (compareNum <= Math.min(denom, sumNumer)) {
+            if (denom % compareNum == 0 && sumNumer % compareNum == 0) {
+                denom /= compareNum;
+                sumNumer /= compareNum;
+                compareNum = 2;
+            } else {
+                compareNum++;
+            }
+        }
+
+        return new int[]{sumNumer, denom};
+    }
+
+    public int solution5(int num1, int num2) {
+        return num1 == num2 ? 1 : -1;
+    }
+
+    public int solution6(int num1, int num2) {
+        double answer = (double)num1 / (double)num2 * 1000;
+        return (int) answer;
+    }
 }
 /*
 문제 설명

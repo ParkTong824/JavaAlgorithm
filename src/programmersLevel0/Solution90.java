@@ -50,6 +50,42 @@ public class Solution90 {
         double answer = (double)num1 / (double)num2 * 1000;
         return (int) answer;
     }
+
+    public int solution7(int num1, int num2) {
+        return num1 / num2;
+    }
+
+    public int solution8(int num1, int num2) {
+        return num1 * num2;
+    }
+
+    public int solution9(int num1, int num2) {
+        return num1 - num2;
+    }
+
+    public int solution10(int num1, int num2) {
+        return num1 + num2;
+    }
+
+    public int solution11(int[] array, int height) {
+        int answer = 0;
+        for (int i : array) {
+            if (i > height) {
+                answer++;
+            }
+        }
+        return answer;
+    }
+
+    public int solution12(int[] array, int n) {
+        int answer = 0;
+        for (int i : array) {
+            if (i == n) {
+                answer++;
+            }
+        }
+        return answer;
+    }
 }
 /*
 문제 설명

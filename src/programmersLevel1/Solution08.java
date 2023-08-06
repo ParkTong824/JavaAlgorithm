@@ -11,28 +11,18 @@ public class Solution08 {
     }
     public int solution1(int n) {
         int answer = 0;
-        int[] checkArr = new int[n+1];
-        for (int i = 2 ; i <= n ; i++) {
-            int pivotNum = 2;
-            boolean check = true;
-            while (i/2 >= pivotNum) {
-                if (checkArr[i] == -1) {
-                    check = false;
-                    break;
-                }
-                if (i % pivotNum == 0) {
-                    check = false;
-                    int checkNum = i;
-                    while (checkNum < n) {
-                        checkArr[checkNum] = -1;
-                        checkNum += i;
-                    }
-                    break;
-                } else {
-                    pivotNum++;
+        boolean[] isNotPrime = new boolean[n+1];
+        isNotPrime[0] = isNotPrime[1] = true;
+        for (int i = 2 ; i*i <= n ; i++) {
+            if (!isNotPrime[i]) {
+                for (int j = i*i ; j<=n ; j+=i) {
+                    isNotPrime[j] = true;
                 }
             }
-            if (check) {
+        }
+
+        for (int i = 0 ; i < isNotPrime.length ; i++) {
+            if (!isNotPrime[i]) {
                 answer++;
             }
         }

@@ -9,6 +9,35 @@ public class Solution08 {
         int distinctSize = Arrays.stream(nums).distinct().boxed().collect(Collectors.toList()).size();
         return Math.min(nums.length / 2, distinctSize);
     }
+    public int solution1(int n) {
+        int answer = 0;
+        int[] checkArr = new int[n+1];
+        for (int i = 2 ; i <= n ; i++) {
+            int pivotNum = 2;
+            boolean check = true;
+            while (i/2 >= pivotNum) {
+                if (checkArr[i] == -1) {
+                    check = false;
+                    break;
+                }
+                if (i % pivotNum == 0) {
+                    check = false;
+                    int checkNum = i;
+                    while (checkNum < n) {
+                        checkArr[checkNum] = -1;
+                        checkNum += i;
+                    }
+                    break;
+                } else {
+                    pivotNum++;
+                }
+            }
+            if (check) {
+                answer++;
+            }
+        }
+        return answer;
+    }
 }
 /*
 제한사항
@@ -21,4 +50,9 @@ nums	result
 [3,1,2,3]	2
 [3,3,3,2,2,4]	3
 [3,3,3,2,2,2]	2
+
+입출력 예
+n	result
+10	4
+5	3
  */

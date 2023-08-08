@@ -28,6 +28,40 @@ public class Solution08 {
         }
         return answer;
     }
+
+    public static String solution2(String s) {
+        StringBuilder result = new StringBuilder();
+        String[] splitArr = s.split(" ");
+        for (int i = 0 ; i < splitArr.length ; i++) {
+            if (i != 0) {
+                result.append(" ");
+            }
+            for (int j = 0 ; j < splitArr[i].length() ; j++) {
+                if (j % 2 == 0) {
+                    if (splitArr[i].charAt(j) >= 'a' && splitArr[i].charAt(j) <= 'z') {
+                        result.append((char)(splitArr[i].charAt(j) - ('a'-'A')));
+                    } else {
+                        result.append(splitArr[i].charAt(j));
+                    }
+                } else {
+                    if (splitArr[i].charAt(j) >= 'A' && splitArr[i].charAt(j) <= 'Z') {
+                        result.append((char)(splitArr[i].charAt(j) + ('a'-'A')));
+                    } else {
+                        result.append(splitArr[i].charAt(j));
+                    }
+                }
+            }
+        }
+
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        char a = 'a';
+        char b = 'A';
+        char c = 'd';
+        System.out.println((char)(c-(a-b)));
+    }
 }
 /*
 제한사항
@@ -45,4 +79,7 @@ nums	result
 n	result
 10	4
 5	3
+
+s	return
+"try hello world"	"TrY HeLlO WoRlD"
  */

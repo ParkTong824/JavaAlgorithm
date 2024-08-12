@@ -2,51 +2,13 @@ package leetcode3;
 
 public class S125_ValidPalindrome {
     public static boolean isPalindrome(String s) {
-        int front = 0;
-        int tail = s.length()-1;
-        s = s.toLowerCase();
-        while (front<tail){
-            boolean isAlpha = false;
-            if (isChar(s,front)){
-                front++;
-                isAlpha=true;
-            }
-            if (isChar(s,tail)){
-                tail--;
-                isAlpha=true;
-            }
-            if(isAlpha){
-                continue;
-            }
-            if(s.charAt(front)!=s.charAt(tail)){
+        char[] charArr = s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "").toCharArray();
+        for (int i = 0 ; i < charArr.length ; i++) {
+            if (charArr[i] != charArr[charArr.length-1-i]) {
                 return false;
-            } else {
-                front++;
-                tail--;
             }
         }
         return true;
-    }
-
-    public static boolean isChar(String s , int index){
-        boolean isNotChar = false;
-        if(!(s.charAt(index)>='a' && s.charAt(index)<='z')){
-            isNotChar = true;
-        }else {
-            return false;
-        }
-        if (!(s.charAt(index)>='A' && s.charAt(index)<='Z')){
-            isNotChar = true;
-        }else {
-            return false;
-        }
-        if (!(s.charAt(index)>='0' && s.charAt(index)<='9')){
-            isNotChar = true;
-        }else {
-            return false;
-        }
-
-        return isNotChar;
     }
 
     public static void main(String[] args) {
@@ -55,6 +17,12 @@ public class S125_ValidPalindrome {
     }
 }
 /*
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and
+ removing all non-alphanumeric characters, it reads the same forward and backward.
+ Alphanumeric characters include letters and numbers.
+
+Given a string s, return true if it is a palindrome, or false otherwise.
+
 Input: s = "A man, a plan, a canal: Panama"
 Output: true
 Explanation: "amanaplanacanalpanama" is a palindrome.

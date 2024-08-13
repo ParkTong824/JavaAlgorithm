@@ -1,34 +1,30 @@
 package leetcode3;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class S136_SingleNumber {
     public static int singleNumber(int[] nums) {
-        Map<Integer,Integer> intMap = new HashMap<>();
-        for (int i = 0 ; i < nums.length ; i++){
-            if (intMap.containsKey(nums[i])){
-                intMap.put(nums[i],intMap.get(nums[i])+1);
-            } else {
-                intMap.put(nums[i],1);
+        Set<Integer> checkSet = new HashSet<>();
+        for (int num : nums) {
+            if (!checkSet.add(num)){
+                checkSet.remove(num);
             }
         }
-
-        for (int key : intMap.keySet()){
-            if (intMap.get(key)==1){
-                return key;
-            }
-        }
-        return 0;
+        return (int) checkSet.toArray()[0];
     }
 
     public static void main(String[] args) {
+        Set<Integer> check = new HashSet<>();
         int[] nums = {1};
-        System.out.println(singleNumber(nums));
+        System.out.println(check.add(1));
+        System.out.println(check.add(1));
     }
 }
 /*
+Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+
+You must implement a solution with a linear runtime complexity and use only constant extra space.
+
 Input: nums = [2,2,1]
 Output: 1
 Example 2:

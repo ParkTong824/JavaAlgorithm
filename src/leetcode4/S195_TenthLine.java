@@ -19,4 +19,7 @@ public class S195_TenthLine {
         }
         System.out.println("Line "+lineNum);
     }
+    /*
+    sed -n '10p' file.txt
+     */
 }

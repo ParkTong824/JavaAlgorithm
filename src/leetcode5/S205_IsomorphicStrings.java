@@ -1,18 +1,17 @@
 package leetcode5;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class S205_IsomorphicStrings {
     public boolean isIsomorphic(String s, String t) {
-        boolean sIs = false;
-        boolean tIs = false;
-        for (int i = 1 ; i < s.length() ; i++){
-            if (s.charAt(i)==s.charAt(i-1)){
-                sIs = true;
-            }
-            if (t.charAt(i)==t.charAt(i-1)){
-                tIs = true;
-            }
+        Set<Character> checkSet = new HashSet<>();
+        char[] chars = s.toCharArray();
+        for (int i = 0 ; i < chars.length ; i++) {
+            
         }
-        return sIs==tIs;
+
+        return true;
     }
 }
 

@@ -5,24 +5,14 @@ import java.util.Arrays;
 public class S338_CountingBits {
     public static int[] countBits(int n) {
         int[] answer = new int[n+1];
-        answer[0]=0;
-
-        int[] bitCount = {1,2,2,3};
-
-        int nextPow = 2;
-        int count = 0;
-
-        for(int i=1;i<=n;i++){
-            if (i == nextPow) {
-                nextPow = nextPow * 2;
-                count = 0;
-            }
+        for(int i = 1; i <= n; i++){
+            answer[i] = (i & 1) + answer[i/2];
         }
         return answer;
     }
 
     public static void main(String[] args) {
-        int n = 5;
+        int n = 32;
         System.out.println(Arrays.toString(countBits(n)));
     }
 }
@@ -34,8 +24,8 @@ ans[i] is the number of 1's in the binary representation of i.
 2 3
 1 2
 
-4 5 6 7
-1 2 2 3
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+1 1 2 1 2 2 3 1 2  2  3  2  3  3  4  1  2  2  3  2  3  3  4  2  3  3  4  3  4  4  5
 
 8 9 10 11 12 13 14 15
 1 2 2 3 2 3 3 4

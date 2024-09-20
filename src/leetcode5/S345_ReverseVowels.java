@@ -6,54 +6,63 @@ import java.util.Set;
 
 public class S345_ReverseVowels {
     public static String reverseVowels(String s) {
-        char[] sArr = s.toCharArray();
-        int head = 0;
-        int tail = sArr.length-1;
-        Set<Character> vowelSet = new HashSet<>();
-        vowelSet.add('i');
-        vowelSet.add('a');
-        vowelSet.add('e');
-        vowelSet.add('o');
-        vowelSet.add('u');
-        boolean front = false;
-        boolean back = false;
-        while (head<tail) {
-            if (vowelSet.contains(sArr[head])){
-                front=true;
+        int frontPivot = 0;
+        int backPivot = s.length()-1;
+        char[] reverseRequiredArr = {'A','E','I','O','U','a','e','i','o','u'};
+        boolean isFront = false;
+        boolean isBack = false;
+        StringBuilder answer = new StringBuilder(s);
+        while (frontPivot < backPivot) {
+            if (!isFront && Arrays.binarySearch(reverseRequiredArr, s.charAt(frontPivot))<0) {
+                frontPivot++;
             } else {
-                head++;
+                isFront = true;
             }
-            if (vowelSet.contains(sArr[tail])){
-                back=true;
-            } else {
-                tail--;
-            }
-            if (front&&back){
-                char temp = sArr[head];
-                sArr[head] = sArr[tail];
-                sArr[tail] = temp;
-                head++;
-                tail--;
-            }
-        }
 
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0 ; i < sArr.length ; i++) {
-            stringBuilder.append(sArr[i]);
+            if (!isBack && Arrays.binarySearch(reverseRequiredArr, s.charAt(backPivot))<0) {
+                backPivot--;
+            } else {
+                isBack = true;
+            }
+
+            if (isFront && isBack) {
+                char temp = s.charAt(frontPivot);
+                answer.setCharAt(frontPivot, s.charAt(backPivot));
+                answer.setCharAt(backPivot, temp);
+                isFront = false;
+                isBack = false;
+                frontPivot++;
+                backPivot--;
+            }
         }
-        return stringBuilder.toString();
+        return answer.toString();
     }
 
     public static void main(String[] args) {
-        String s = "leetcode";
-        System.out.println(reverseVowels(s));
+        String s = "IceCreAm";
+
+        System.out.println(Arrays.binarySearch(reverseRequiredArr, s.charAt(0)));
+//        System.out.println(reverseVowels(s));
     }
 
 }
 /*
-Input: s = "hello"
-Output: "holle"
+Given a string s, reverse only all the vowels in the string and return it.
+The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.
+
+Input: s = "IceCreAm"
+Output: "AceCreIm"
+
+Explanation:
+The vowels in s are ['I', 'e', 'e', 'A']. On reversing the vowels, s becomes "AceCreIm".
 
 Input: s = "leetcode"
 Output: "leotcede"
+
+
+
+Constraints:
+
+1 <= s.length <= 3 * 105
+s consist of printable ASCII characters.
  */

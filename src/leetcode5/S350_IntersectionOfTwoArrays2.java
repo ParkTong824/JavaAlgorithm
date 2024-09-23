@@ -1,28 +1,48 @@
 package leetcode5;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class S350_IntersectionOfTwoArrays2 {
     public int[] intersect(int[] nums1, int[] nums2) {
-        Set<Integer> num1 = new HashSet<>();
-        Set<Integer> num2 = new HashSet<>();
+        Map<Integer, Integer> numberMap = new HashMap<>();
+        List<Integer> result = new ArrayList<>();
+        for ( int i : nums1 ) {
+            numberMap.put(i, numberMap.getOrDefault(i, 0)+1);
+        }
+        for (int i : nums2) {
+            if (numberMap.containsKey(i)) {
+                result.add(i);
+                int containCount = numberMap.get(i);
+                if (containCount == 1) {
+                    numberMap.remove(i);
+                } else {
+                    numberMap.put(i, containCount-1);
+                }
+            }
+        }
 
-        List<Integer> arr = Arrays.stream(nums1).boxed().toList();
-        List<Integer> arr2 = Arrays.stream(nums2).boxed().toList();
+        int[] answer = new int[result.size()];
+        for (int i = 0 ; i < answer.length ; i++) {
+            answer[i] = result.get(i);
+        }
 
-        num1.addAll(arr);
-        num2.addAll(arr2);
-        num1.retainAll(num2);
-
-        return num1.stream().mapToInt(i -> i).toArray();
+        return answer;
     }
 }
 
 /*
+
+[54,93,21,73,84,60,18,62,59,89,83,89,25,39,41,55,78,27,65,82,94,61,12,38,76,5,35,6,51,48,61,0,47,60,84,9,13,28,38,21,55,37,4,67,64,86,45,33,41]
+
+[17,17,87,98,18,53,2,69,74,73,20,85,59,89,84,91,84,34,44,48,20,42,68,84,8,54,66,62,69,52,67,27,87,49,92,14,92,53,22,90,60,14,8,71,0,61,94,1,22,84,10,55,55,60,98,76,27,35,84,28,4,2,9,44,86,12,17,89,35,68,17,41,21,65,59,86,42,53,0,33,80,20]
+
+Output
+[,,,84,84,48,84,54,62,67,27,60,0,61,94,84,55,55,60,76,35,84,28,4,9,86,12,89,41,21,65,33]
+Expected
+[54,21,73,84,60,18,62,59,89,89,41,55,27,65,94,61,12,76,35,48,0,60,84,9,28,55,4,67,86,33]
+
+
 Given two integer arrays nums1 and nums2, return an array of their intersection.
 Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.
 

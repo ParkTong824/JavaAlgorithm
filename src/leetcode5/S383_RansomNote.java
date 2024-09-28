@@ -5,26 +5,42 @@ import java.util.Map;
 
 public class S383_RansomNote {
     public static boolean canConstruct(String ransomNote, String magazine) {
-        Map<Character,Integer> magazineMap = new HashMap<>();
-        for (int i = 0 ; i < magazine.length() ; i++) {
-            if (magazineMap.containsKey(magazine.charAt(i))) {
-                magazineMap.put(magazine.charAt(i),magazineMap.get(magazine.charAt(i))+1);
-            } else {
-                magazineMap.put(magazine.charAt(i),1);
-            }
+        if (magazine.length() < ransomNote.length()) {
+            return false;
         }
-        for (int i = 0 ; i < ransomNote.length() ; i++) {
-            if (!magazineMap.containsKey(ransomNote.charAt(i))){
-                return false;
+
+        Map<Character,Integer> magazineMap = new HashMap<>();
+        Map<Character,Integer> ransomMap = new HashMap<>();
+
+        boolean isRansomFinish = false;
+
+        for (int i = 0 ; i < magazine.length() ; i++) {
+            char c = magazine.charAt(i);
+            if (!magazineMap.containsKey(c)) {
+                magazineMap.put(c,1);
             } else {
-                if (magazineMap.get(ransomNote.charAt(i))>0){
-                    magazineMap.put(ransomNote.charAt(i),magazineMap.get(ransomNote.charAt(i))-1);
+                magazineMap.put(c,magazineMap.get(c)+1);
+            }
+            if (!isRansomFinish) {
+                char r = ransomNote.charAt(i);
+                if (!ransomMap.containsKey(r)) {
+                    ransomMap.put(r,1);
                 } else {
-                    return false;
+                    ransomMap.put(r,ransomMap.get(r)+1);
+                }
+
+                if (i+1 == ransomNote.length()) {
+                    isRansomFinish = true;
                 }
             }
         }
-        return false;
+        for (char c : ransomMap.keySet()) {
+            if (!(magazineMap.containsKey(c) && ransomMap.get(c) <= magazineMap.get(c))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {
@@ -35,11 +51,17 @@ public class S383_RansomNote {
     }
 }
 /*
+Given two strings ransomNote and magazine, return true if ransomNote can be constructed by using the letters from magazine and false otherwise.
+
+Each letter in magazine can only be used once in ransomNote.
+
 Input: ransomNote = "a", magazine = "b"
 Output: false
+Example 2:
 
 Input: ransomNote = "aa", magazine = "ab"
 Output: false
+Example 3:
 
 Input: ransomNote = "aa", magazine = "aab"
 Output: true

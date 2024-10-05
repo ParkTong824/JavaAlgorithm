@@ -41,7 +41,7 @@ public class S345_ReverseVowels {
     public static void main(String[] args) {
         String s = "IceCreAm";
 
-        System.out.println(Arrays.binarySearch(reverseRequiredArr, s.charAt(0)));
+//        System.out.println(Arrays.binarySearch(reverseRequiredArr, s.charAt(0)));
 //        System.out.println(reverseVowels(s));
     }
 
